@@ -16,7 +16,7 @@ CREATE TABLE sources (
 
 CREATE TABLE tracts (
   tract VARCHAR PRIMARY KEY,
-  RegionName VARCHAR
+  neighborhood VARCHAR
 );
 
 CREATE TABLE zillow (
@@ -48,15 +48,15 @@ CREATE TABLE unemployment (
 
 CREATE TABLE disney (
   neighborhood VARCHAR,
-  period DATE,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   updated_by VARCHAR DEFAULT CURRENT_USER NOT NULL,
-  value DOUBLE,
-  PRIMARY KEY (neighborhood, period, updated_at)
+  distance DOUBLE,
+  duration DOUBLE,
+  PRIMARY KEY (neighborhood, updated_at)
 );
 
 INSERT INTO sources (name, desc, url, freq, geo) VALUES
-('zillow', 'Zillow Home Value Index', 'https://www.zillow.com/research/data/', 'Y', 'NH'),
+('zillow', 'Zillow Home Value Index', 'https://www.zillow.com/research/data/', 'M', 'NH'),
 ('income', 'Median Household Income', 'https://www.census.gov/data/developers/data-sets/acs-5year.html', 'Y', 'T'),
 ('unemployment', 'Unemployment Rate', 'ttps://www.census.gov/data/developers/data-sets/acs-5year.html', 'Y', 'T'),
-('disney', 'Distance to Disney World', 'https://www.disney.com/parks-and-resorts/', 'Y', 'NH');
+('disney', 'Distance to Disney World', 'https://www.disney.com/parks-and-resorts/', 'I', 'NH');
