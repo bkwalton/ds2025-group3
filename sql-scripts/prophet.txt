@@ -1,0 +1,2 @@
+SELECT neighborhood, period, value
+FROM zillow;

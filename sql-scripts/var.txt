@@ -1,0 +1,22 @@
+SELECT
+  t.neighborhood,
+  i.period AS year,  -- Use the 'period' from 'income' as the single 'year' column
+  AVG(z.value) AS zillow,  -- Averaging Zillow values by year
+  i.value AS income,
+  u.value AS unemployment,
+  d.distance,
+  d.duration
+FROM
+  tracts t
+JOIN
+  income i ON t.tract = i.tract
+JOIN
+  unemployment u ON t.tract = u.tract AND u.period = i.period  -- First join on tract, then match year
+LEFT JOIN
+  zillow z ON t.neighborhood = z.neighborhood AND strftime('%Y', z.period) = i.period  -- Match the year for zillow with income
+LEFT JOIN
+  disney d ON t.neighborhood = d.neighborhood
+GROUP BY
+  t.neighborhood, i.period, d.distance, d.duration  -- Group by neighborhood and year (from 'income')
+ORDER BY
+  t.neighborhood, i.period;
