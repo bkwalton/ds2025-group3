@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS models;
+
+CREATE TABLE models (
+  neighborhood VARCHAR,
+  model VARCHAR CHECK (model IN ('VAR', 'prophet')),
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  updated_by VARCHAR DEFAULT CURRENT_USER NOT NULL,
+  value DOUBLE,
+  PRIMARY KEY (neighborhood, model, updated_at)
+);

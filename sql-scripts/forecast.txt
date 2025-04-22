@@ -1,0 +1,24 @@
+DROP TABLE IF EXISTS var_forecast;
+DROP TABLE IF EXISTS prophet_forecast;
+
+CREATE TABLE var_forecast (
+  neighborhood VARCHAR,
+  period DATE,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  updated_by VARCHAR DEFAULT CURRENT_USER NOT NULL,
+  value DOUBLE,
+  PRIMARY KEY (neighborhood, period, updated_at)
+);
+
+CREATE TABLE prophet_forecast (
+  neighborhood VARCHAR,
+  period DATE,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  updated_by VARCHAR DEFAULT CURRENT_USER NOT NULL,
+  value DOUBLE,
+  PRIMARY KEY (neighborhood, period, updated_at)
+);
+
+INSERT OR IGNORE INTO sources (name, desc, url, freq, geo) VALUES
+('var_forecast', 'Home Price Forecasts from VAR Model', 'created', 'Y', 'NH'),
+('prophet_forecast', 'Home Price Forecasts from Prophet Model', 'created', 'M', 'NH');
